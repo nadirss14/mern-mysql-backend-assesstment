@@ -1,0 +1,33 @@
+{
+  "name": "mern-mysql-backend-assesstment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev-no-windows": "DEBUG=express:*,app:* & nodemon index.js",
+    "dev": "set DEBUG=express:*,app:* & nodemon index.js",
+    "start-no-windows": "NODE_ENV=production node index.js",
+    "start": "set NODE_ENV=production & node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nadirss14/mern-mysql-backend-assesstment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nadirss14/mern-mysql-backend-assesstment/issues"
+  },
+  "homepage": "https://github.com/nadirss14/mern-mysql-backend-assesstment#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.4.1",
+    "mysql": "^2.17.1"
+  }
+}
