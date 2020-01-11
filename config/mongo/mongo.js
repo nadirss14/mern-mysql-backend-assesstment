@@ -1,16 +1,15 @@
 const { MongoClient, ObjectId } = require("mongodb");
-const { config } = require("../config");
+const { config } = require("../environment");
 
 // El encodeURIComponent garantiza que los caracteres especiales viajen sin problemas en la configuracion
-const USER = encodeURIComponent(config.DB_USER);
-const PASSWORD = encodeURIComponent(config.DB_PASSWORD);
-const DB_NAME = config.DB_NAME;
+const USER = encodeURIComponent(config.DB_USER_MONGO);
+const PASSWORD = encodeURIComponent(config.DB_PASSWORD_MONGO);
+const DB_NAME = encodeURIComponent(config.DB_NAME_MONGO);
+const DB_HOST = encodeURIComponent(config.DB_HOST_MONGO);
 
-console.log(
-  `mongodb+srv://${USER}:${PASSWORD}@${config.DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`
-);
+const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`;
 
-const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${config.DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`;
+console.log(MONGO_URI);
 
 class MongoLib {
   constructor() {
@@ -28,7 +27,7 @@ class MongoLib {
           if (error) {
             reject(error);
           }
-          console.log("Conectado exitosamente");
+          console.log("Conectado exitosamente a mongoDB");
           resolve(this.client.db(this.dbName));
         });
       });
@@ -38,43 +37,59 @@ class MongoLib {
 
   // eslint-disable-next-line no-unused-vars
   getAll(collection, query) {
-    return this.connect().then(db => {
-      return db
-        .collection(collection)
-        .find()
-        .toArray();
-    });
+    console.log("aqui");
+    return this.connect()
+      .then(db => {
+        return db
+          .collection(collection)
+          .find()
+          .toArray();
+      })
+      .catch(error => {
+        console.log(`Error in getAll() in to the mongo.js : ${error.message}`);
+      });
   }
 
   get(collection, id) {
-    return this.connect().then(db => {
-      return db.collection(collection).findOne({ _id: ObjectId(id) });
-    });
+    return this.connect()
+      .then(db => {
+        return db.collection(collection).findOne({ _id: ObjectId(id) });
+      })
+      .catch(error => {
+        console.log(`Error in get() in to the mongo.js : ${error.message}`);
+      });
   }
 
   create(collection, data) {
-    // const _data = { _id: ObjectId(), ...data };
     return this.connect()
       .then(db => {
         return db.collection(collection).insertOne(data);
       })
       .catch(error => {
-        console.log(error);
+        console.log(`Error in create() in to the mongo.js : ${error.message}`);
       });
   }
 
   update(collection, id, data) {
-    return this.connect().then(db => {
-      return db
-        .collection(collection)
-        .updateOne({ _id: ObjectId(id) }, { $set: data }, { upsert: true });
-    });
+    return this.connect()
+      .then(db => {
+        return db
+          .collection(collection)
+          .updateOne({ _id: ObjectId(id) }, { $set: data }, { upsert: true });
+      })
+      .catch(error => {
+        console.log(`Error in update() in to the mongo.js : ${error.message}`);
+      });
   }
 
   delete(collection, id) {
-    return this.connect().then(db => {
-      return db.collection(collection).deleteOne({ _id: ObjectId(id) });
-    });
+    return this.connect()
+      .then(db => {
+        return db.collection(collection).deleteOne({ _id: ObjectId(id) });
+      })
+      .catch(error => {
+        console.log(`Error in delete() in to the mongo.js : ${error.message}`);
+      });
   }
 }
 

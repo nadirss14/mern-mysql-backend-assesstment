@@ -1,20 +1,29 @@
 const { config } = require("../environment");
 const mysql = require("mysql");
-const {
-  CONNECTION_LIMIT,
-  HOST,
-  USER,
-  PASSWORD,
-  DATA_BASE
-} = require("./configMySql");
+// const {
+//   CONNECTION_LIMIT,
+//   HOST,
+//   USER,
+//   PASSWORD,
+//   DATA_BASE
+// } = require("./configMySql");
+
+// const pool = mysql.createPool({
+//   connectionLimit: CONNECTION_LIMIT,
+//   host: HOST,
+//   // port: config.DB_PORT_MYSQL,
+//   user: USER,
+//   password: PASSWORD,
+//   database: DATA_BASE
+// });
 
 const pool = mysql.createPool({
-  connectionLimit: CONNECTION_LIMIT,
-  host: HOST,
+  connectionLimit: encodeURIComponent(config.DB_CONNECTION_LIMIT_MYSQL),
+  host: encodeURIComponent(config.DB_HOST_MYSQL),
   // port: config.DB_PORT_MYSQL,
-  user: USER,
-  password: PASSWORD,
-  database: DATA_BASE
+  user: encodeURIComponent(config.DB_USER_MYSQL),
+  password: encodeURIComponent(config.DB_PASSWORD_MYSQL),
+  database: encodeURIComponent(config.DB_DATA_BASE_MYSQL)
 });
 
 pool.getConnection((error, connection) => {

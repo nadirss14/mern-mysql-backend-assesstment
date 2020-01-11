@@ -6,7 +6,6 @@ const { config } = require("./config/environment");
 const Jobs = require("./jobs/index");
 const executeJobs = new Jobs();
 const URL_BASE = `${config.API_BASE}/${config.API_VERSION}`;
-const Router = Express.Router();
 
 // const {
 //   logErrors,
@@ -16,14 +15,15 @@ const Router = Express.Router();
 
 // const notFoundHandler = require('./util/middleware/notFountHandler.js');
 
-require("./routes/index")(app, URL_BASE, Router);
-require("./routes/default")(app);
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+require("./routes/mongo/user")(app, URL_BASE);
+require("./routes/mysql/agent")(app, URL_BASE);
+require("./routes/default")(app);
 app.use(cors());
 
-executeJobs.getAllAgents();
+//executeJobs.getAllAgentsFromMySql();
 
 // app.use(notFoundHandler);
 // //Manejadores de Errores

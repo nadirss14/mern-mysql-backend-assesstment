@@ -1,5 +1,5 @@
 const Express = require("express");
-const Service = require("../services/AgentServices");
+const Service = require("../../services/mysql/AgentServices");
 
 // const PortfolioServices = require('../services/portfolioService');
 // const Services = new PortfolioServices();
@@ -11,8 +11,8 @@ const Service = require("../services/AgentServices");
 // } = require('../util/time');
 
 module.exports = (app, BASE_URL, Router) => {
-  const router = Router;
-  app.use(`/${BASE_URL}/agents`, router);
+  const router = Express.Router();
+  app.use(`/${BASE_URL}/agent`, router);
 
   router.get("/", async (req, resp, next) => {
     try {
