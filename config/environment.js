@@ -6,10 +6,10 @@ const config = {
   API_VERSION: "v1",
   API_BASE: "api",
   CORS: "*",
-  DB_HOST: process.env.DB_HOST,
-  DB_USER: process.env.DB_USER,
-  DB_PASSWORD: process.env.DB_PASSWORD,
-  DB_NAME: process.env.DB_NAME
+  DB_HOST_MONGO: process.env.DB_HOST_MONGO,
+  DB_USER_MONGO: process.env.DB_USER_MONGO,
+  DB_PASSWORD_MONGO: process.env.DB_PASSWORD_MONGO,
+  DB_NAME_MONGO: process.env.DB_NAME_MONGO
 };
 
 module.exports = { config };
