@@ -16,7 +16,7 @@ module.exports = (app, BASE_URL, Router) => {
 
   router.get("/", async (req, resp, next) => {
     try {
-      const data = await Service.getAgents();
+      const data = await Service.getAllAgents();
       resp.status(200).json(data);
     } catch (error) {
       console.log(`Error en ${req.url}: ${error}`);

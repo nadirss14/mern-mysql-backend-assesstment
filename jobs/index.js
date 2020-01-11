@@ -17,7 +17,7 @@ class Jobs {
     console.log("init...");
   }
 
-  getAllUser() {
+  getAllAgents() {
     const jobs = scheduled.scheduleJob("/1 * * * * *", async () => {
       const options = {};
       options.method = "GET";

@@ -2,7 +2,7 @@
 const db = require("../config/mysql/mysqlConnection");
 
 module.exports = {
-  getAgents: () => {
+  getAllAgents: () => {
     console.log("Entre....");
     return new Promise((resolve, reject) => {
       try {

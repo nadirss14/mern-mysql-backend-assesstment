@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-executeJobs.getAllUser();
+executeJobs.getAllAgents();
 
 // app.use(notFoundHandler);
 // //Manejadores de Errores
