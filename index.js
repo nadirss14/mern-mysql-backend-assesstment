@@ -18,12 +18,14 @@ const URL_BASE = `${config.API_BASE}/${config.API_VERSION}`;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-require("./routes/mongo/user")(app, URL_BASE);
-require("./routes/mysql/agent")(app, URL_BASE);
+require("./routes/mongo/userRoutes")(app, URL_BASE);
+require("./routes/mongo/projectRoutes")(app, URL_BASE);
+require("./routes/mongo/AgentRoutes")(app, URL_BASE);
+require("./routes/mysql/agentRoutes")(app, URL_BASE);
 require("./routes/default")(app);
 app.use(cors());
 
-//executeJobs.getAllAgentsFromMySql();
+executeJobs.getAllAgentsFromMySql();
 
 // app.use(notFoundHandler);
 // //Manejadores de Errores

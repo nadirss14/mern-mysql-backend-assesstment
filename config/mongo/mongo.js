@@ -37,7 +37,6 @@ class MongoLib {
 
   // eslint-disable-next-line no-unused-vars
   getAll(collection, query) {
-    console.log("aqui");
     return this.connect()
       .then(db => {
         return db

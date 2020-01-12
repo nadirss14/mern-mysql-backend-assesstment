@@ -1,10 +1,12 @@
-const MongoLib = require("../../config/mongo/mongo");
-
+const mongoose = require("mongoose");
+const MongoseLib = require("../../config/mongo/mongoose");
+const User = require("../../model/user.model");
 class UserServices {
   constructor() {
-    this.collection = "user";
+    this.collection = "users";
     this.mongoDB = new MongoLib();
   }
+
   async getUser({ tags }) {
     const query = tags && { tags: { $in: tags } };
     const User = await this.mongoDB.getAll(this.collection, query);
@@ -16,9 +18,9 @@ class UserServices {
     return User || [];
   }
 
-  async createUser(User) {
+  async createUser(user) {
     const createUserId = await this.mongoDB.create(this.collection, {
-      User
+      user
     });
     return createUserId;
   }

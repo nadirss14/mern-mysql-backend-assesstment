@@ -10,9 +10,9 @@ const Service = require("../../services/mysql/AgentServices");
 //   SIXTY_MINUTES_IN_SECONDS
 // } = require('../util/time');
 
-module.exports = (app, BASE_URL, Router) => {
+module.exports = (app, BASE_URL) => {
   const router = Express.Router();
-  app.use(`/${BASE_URL}/agent`, router);
+  app.use(`/${BASE_URL}/data`, router);
 
   router.get("/", async (req, resp, next) => {
     try {
