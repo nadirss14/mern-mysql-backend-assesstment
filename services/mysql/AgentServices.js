@@ -6,7 +6,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       try {
         db.query(
-          "SELECT * FROM sql10318391.agents LIMIT 0, 2",
+          "SELECT * FROM sql10318391.agents WHERE (REFERENCE_ID = '' or REFERENCE_ID = null)  LIMIT 0, 5;",
           (error, results) => {
             if (error) {
               reject(error);
@@ -20,12 +20,17 @@ module.exports = {
     });
   },
   updateAgent: agent => {
-    let createAgent = `CALL sp_updateAgent ('${agent.agentCode}',
-                                          '${agent._id}', 
-                                          '${agent.createDate}');
-                                      `;
+    // let updateAgent = `CALL sp_updateAgent ('${agent.agent_code}',
+    //                                       '${agent.reference_id}',
+    //                                       '${agent.create_date}');
+    // `;
+    let updateAgent = `UPDATE sql10318391.agents 
+                        SET CREATE_DATE = '${agent.create_date}', 
+                        REFERENCE_ID = '${agent.reference_id}' 
+                        WHERE (AGENT_CODE = '${agent.agent_code}'); `;
+    console.log(updateAgent);
     return new Promise((resolve, reject) => {
-      db.query(createAgent, (error, result) => {
+      db.query(updateAgent, (error, result) => {
         if (error) {
           reject(error);
         }

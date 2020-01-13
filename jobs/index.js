@@ -33,6 +33,7 @@ class Jobs {
           this.insertIntoDataWarehouse(data);
         }
         console.log(new Date());
+        console.log("getAllAgentsFromMySql");
       } catch (error) {
         console.log(`Error: ${error}`);
       }
@@ -44,13 +45,14 @@ class Jobs {
       try {
         const agent = {
           agentCode: element.AGENT_CODE,
-          agentName: element.AGENt_NAME,
-          agentPhone: element.PHONO_NO,
+          agentName: element.AGENT_NAME,
+          agentPhone: element.PHONE_NO,
           workingArea: element.WORKING_AREA,
           commisions: element.COMMISSION,
           country: ""
         };
         this.pushAgent(agent);
+        console.log("insertIntoDataWarehouse");
       } catch (error) {
         console.log(`Error: ${error}`);
       }
@@ -58,7 +60,6 @@ class Jobs {
   }
 
   async pushAgent(agent) {
-    console.log(agent);
     const URL = `http://localhost:${config.PORT}/${config.API_BASE}/${config.API_VERSION}/agent`;
     const options = {};
     options.method = "POST";
@@ -69,31 +70,37 @@ class Jobs {
 
     const result = await fetch(URL, options);
     const data = await result.json();
-    console.log(data);
+    console.log("pushAgent");
     if (data) {
       this.updateAgentMySql(data);
     }
   }
 
-  updateAgentMySql(data) {
-    const params = JSON.stringify(data);
+  async updateAgentMySql(data) {
+    const URL = `http://localhost:${config.PORT}/${config.API_BASE}/${config.API_VERSION}/data`;
+    try {
+      const JsonData = JSON.stringify(data);
+      console.log(JsonData);
+      const result = JSON.parse(JsonData, (k, v) => v);
 
-    // data.forEach(element => {
-    //   (params.agent_code = element.agent.agentCode),
-    //     (params.reference_id = element._id),
-    //     (params.create_date = element.agent.createDate);
-    // });
+      const params = {
+        agent_code: result.agent.agentCode,
+        reference_id: result._id,
+        create_date: result.agent.createDate
+      };
+      console.log(JSON.stringify(params));
+      const options = {};
+      options.method = "PUT";
+      options.body = JSON.stringify(params);
+      options.headers = {
+        "Content-Type": "application/json"
+      };
 
-    console.log(params.data);
-    // const options = {};
-    // options.method = "PUT";
-    // options.body = JSON.stringify(agent);
-    // options.headers = {
-    //   "Content-Type": "application/json"
-    // };
-
-    // const result = await fetch(URL, options);
-    // const data = await result.json();
+      const response = await fetch(URL, options);
+      const value = await response.json();
+    } catch (error) {
+      console.log(`Error: ${error}`);
+    }
   }
 }
 
