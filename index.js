@@ -12,20 +12,17 @@ const URL_BASE = `${config.API_BASE}/${config.API_VERSION}`;
 //   wrapErrors,
 //   errorHandler
 // } = require('./util/middleware/errorHandlers.js');
-
-// const notFoundHandler = require('./util/middleware/notFountHandler.js');
-
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
+// const notFoundHandler = require('./util/middleware/notFountHandler.js');
 require("./routes/mongo/userRoutes")(app, URL_BASE);
 require("./routes/mongo/projectRoutes")(app, URL_BASE);
 require("./routes/mongo/AgentRoutes")(app, URL_BASE);
 require("./routes/mysql/agentRoutes")(app, URL_BASE);
 require("./routes/default")(app);
-app.use(cors());
 
-executeJobs.getAllAgentsFromMySql();
+//executeJobs.getAllAgentsFromMySql();
 
 // app.use(notFoundHandler);
 // //Manejadores de Errores

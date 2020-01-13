@@ -34,6 +34,17 @@ class UserService {
         return err;
       });
   }
+  Login(data) {
+    console.log(`Este es el data ${JSON.stringify(data)}`);
+    return User.find(data)
+      .then(item => {
+        return item;
+      })
+      .catch(err => {
+        console.log(err.message);
+        return err;
+      });
+  }
 
   create(data) {
     let newUser = new User({ user: { ...data } });
