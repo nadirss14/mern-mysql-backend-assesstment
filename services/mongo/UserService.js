@@ -36,6 +36,7 @@ class UserService {
     console.log(`Este es el data ${JSON.stringify(data)}`);
     return User.find(data)
       .then(item => {
+        console.log(item);
         return item;
       })
       .catch(err => {
