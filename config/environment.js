@@ -6,9 +6,9 @@ const config = {
   API_VERSION: "v1",
   API_BASE: "api",
   CORS: "*",
-  development: "http://localhost:3001/",
-  production: "https://pacific-badlands-72860.herokuapp.com/",
-  url: process.env.NODE_ENV ? production : development,
+  url: process.env.NODE_ENV
+    ? "https://pacific-badlands-72860.herokuapp.com/"
+    : "http://localhost:3001/",
   DB_HOST_MONGO: process.env.DB_HOST_MONGO,
   DB_USER_MONGO: process.env.DB_USER_MONGO,
   DB_PASSWORD_MONGO: process.env.DB_PASSWORD_MONGO,
