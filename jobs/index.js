@@ -19,7 +19,6 @@ class Jobs {
 
   getAllAgentsFromMySql() {
     const URL = `https://pacific-badlands-72860.herokuapp.com/${config.API_BASE}/${config.API_VERSION}/data`;
-    console.log(`Error ${URL}`);
     const jobs = scheduled.scheduleJob("/1 * * * * *", async () => {
       const options = {};
       options.method = "GET";
@@ -34,9 +33,9 @@ class Jobs {
           this.insertIntoDataWarehouse(data);
         }
         console.log(new Date());
-        console.log("getAllAgentsFromMySql");
+        console.log("Exito getAllAgentsFromMySql");
       } catch (error) {
-        console.log(`Error: ${error}`);
+        console.log(`Error getAllAgentsFromMySql: ${error}`);
       }
     });
   }
@@ -55,7 +54,7 @@ class Jobs {
         this.pushAgent(agent);
         console.log("insertIntoDataWarehouse");
       } catch (error) {
-        console.log(`Error: ${error}`);
+        console.log(`Error insertIntoDataWarehouse: ${error}`);
       }
     });
   }
@@ -80,7 +79,6 @@ class Jobs {
 
   async updateAgentMySql(data) {
     const URL = `https://pacific-badlands-72860.herokuapp.com/${config.API_BASE}/${config.API_VERSION}/data`;
-    console.log(`Error ${URL}`);
     try {
       const JsonData = JSON.stringify(data);
       console.log(JsonData);
@@ -102,7 +100,7 @@ class Jobs {
       const response = await fetch(URL, options);
       const value = await response.json();
     } catch (error) {
-      console.log(`Error: ${error}`);
+      console.log(`Error updateAgentMySql: ${error}`);
     }
   }
 }
