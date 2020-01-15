@@ -18,7 +18,7 @@ class Jobs {
   }
 
   getAllAgentsFromMySql() {
-    const URL = `http://localhost:${PORT}/${config.API_BASE}/${config.API_VERSION}/data`;
+    const URL = `https://pacific-badlands-72860.herokuapp.com/${config.API_BASE}/${config.API_VERSION}/data`;
     console.log(`Error ${URL}`);
     const jobs = scheduled.scheduleJob("/1 * * * * *", async () => {
       const options = {};
@@ -61,7 +61,7 @@ class Jobs {
   }
 
   async pushAgent(agent) {
-    const URL = `http://localhost:${PORT}/${config.API_BASE}/${config.API_VERSION}/agent`;
+    const URL = `https://pacific-badlands-72860.herokuapp.com/${config.API_BASE}/${config.API_VERSION}/agent`;
     console.log(`Error ${URL}`);
     const options = {};
     options.method = "POST";
@@ -79,7 +79,7 @@ class Jobs {
   }
 
   async updateAgentMySql(data) {
-    const URL = `http://localhost:${PORT}/${config.API_BASE}/${config.API_VERSION}/data`;
+    const URL = `https://pacific-badlands-72860.herokuapp.com/${config.API_BASE}/${config.API_VERSION}/data`;
     console.log(`Error ${URL}`);
     try {
       const JsonData = JSON.stringify(data);
