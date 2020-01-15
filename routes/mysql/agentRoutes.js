@@ -5,8 +5,9 @@ const cors = require("cors");
 
 module.exports = (app, BASE_URL) => {
   const router = Express.Router();
-  app.use(`/${BASE_URL}/data`, router);
+  const path = `/${BASE_URL}/data`;
 
+  app.use(path, router);
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -15,7 +16,7 @@ module.exports = (app, BASE_URL) => {
       const data = await Service.getAllAgents();
       resp.status(200).json(data);
     } catch (error) {
-      console.log(`Error en ${req.url}: ${error}`);
+      console.log(`Error en ${req.url}: ${error.message}`);
     }
   });
 
@@ -25,7 +26,7 @@ module.exports = (app, BASE_URL) => {
       const data = await Service.updateAgent(req.body);
       resp.status(200).json(data);
     } catch (error) {
-      console.log(`Error en ${req.url}: ${error}`);
+      console.log(`Error en ${req.originalUrl}: ${error.message}`);
     }
   });
 };

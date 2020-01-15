@@ -15,7 +15,6 @@ class UserService {
   getAll() {
     return User.find()
       .then(item => {
-        console.log(item);
         return item;
       })
       .catch(err => {
@@ -26,7 +25,6 @@ class UserService {
   getById(id) {
     return User.findById(id)
       .then(item => {
-        console.log(item);
         return item;
       })
       .catch(err => {

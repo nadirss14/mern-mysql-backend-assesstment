@@ -11,9 +11,18 @@ module.exports = (app, BASE_URL) => {
   app.use(path, router);
   router.post("/login", async (req, resp, next) => {
     try {
-      console.log(`Este es el body ${JSON.stringify(req.body)}`);
       const data = await Service.Login(req.body);
-      resp.status(200).json(data);
+      let authUser = {};
+      if (data.length > 0) {
+        console.log(data);
+        authUser = JSON.parse(JSON.stringify(data[0]), (k, v) => {
+          if (k === "password") {
+            return "";
+          }
+          return v;
+        });
+      }
+      resp.status(200).json(authUser);
     } catch (error) {
       console.log(`Error in ${path}${req.url} : ${error.message}`);
     }
@@ -22,7 +31,17 @@ module.exports = (app, BASE_URL) => {
   router.get("/", async (req, resp, next) => {
     try {
       const data = await Service.getAll();
-      resp.status(200).json(data);
+      let authUser = {};
+      if (data.length > 0) {
+        console.log(data);
+        authUser = JSON.parse(JSON.stringify(data[0]), (k, v) => {
+          if (k === "password") {
+            return "";
+          }
+          return v;
+        });
+      }
+      resp.status(200).json(authUser);
     } catch (error) {
       console.log(`Error in ${path}${req.url} : ${error.message}`);
     }
