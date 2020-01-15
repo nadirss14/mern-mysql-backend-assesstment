@@ -6,5 +6,5 @@ let ProjectSchema = new Schema({
     projectName: { type: String }
   }
 });
-// Export the model
+
 module.exports = mongoose.model("Project", ProjectSchema);

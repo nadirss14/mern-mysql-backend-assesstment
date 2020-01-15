@@ -8,13 +8,6 @@ module.exports = (app, BASE_URL) => {
   const router = Express.Router();
   const path = `/${BASE_URL}/user`;
 
-  // app.all("/*", function(req, res, next) {
-  //   res.header("Access-Control-Allow-Origin", "*");
-  //   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  //   next();
-  // });
-  // app.use(cors());
-
   app.use(path, router);
   router.post("/login", async (req, resp, next) => {
     try {

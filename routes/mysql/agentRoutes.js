@@ -3,15 +3,6 @@ const Service = require("../../services/mysql/AgentServices");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-// const PortfolioServices = require('../services/portfolioService');
-// const Services = new PortfolioServices();
-// const { cacheResponse } = require('../util/cacheResponse');
-// const {
-//   FIVE_MINUTES_IN_SECONDS,
-//   // eslint-disable-next-line no-unused-vars
-//   SIXTY_MINUTES_IN_SECONDS
-// } = require('../util/time');
-
 module.exports = (app, BASE_URL) => {
   const router = Express.Router();
   app.use(`/${BASE_URL}/data`, router);

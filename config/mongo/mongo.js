@@ -1,7 +1,6 @@
 const { MongoClient, ObjectId } = require("mongodb");
 const { config } = require("../environment");
 
-// El encodeURIComponent garantiza que los caracteres especiales viajen sin problemas en la configuracion
 const USER = encodeURIComponent(config.DB_USER_MONGO);
 const PASSWORD = encodeURIComponent(config.DB_PASSWORD_MONGO);
 const DB_NAME = encodeURIComponent(config.DB_NAME_MONGO);
@@ -35,7 +34,6 @@ class MongoLib {
     return MongoLib.connection;
   }
 
-  // eslint-disable-next-line no-unused-vars
   getAll(collection, query) {
     return this.connect()
       .then(db => {
