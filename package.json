@@ -2,12 +2,15 @@
   "name": "mern-mysql-backend-assesstment",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "10.x"
+  },
   "main": "index.js",
   "scripts": {
     "dev-no-windows": "DEBUG=express:*,app:* & nodemon index.js",
     "dev": "set DEBUG=express:*,app:* & nodemon index.js",
-    "start-no-windows": "NODE_ENV=production node index.js",
-    "start": "set NODE_ENV=production & node index.js"
+    "start": "NODE_ENV=production node index.js",
+    "start-windows": "set NODE_ENV=production & node index.js"
   },
   "repository": {
     "type": "git",
