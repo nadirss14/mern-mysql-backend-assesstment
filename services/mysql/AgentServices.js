@@ -20,10 +20,6 @@ module.exports = {
     });
   },
   updateAgent: agent => {
-    // let updateAgent = `CALL sp_updateAgent ('${agent.agent_code}',
-    //                                       '${agent.reference_id}',
-    //                                       '${agent.create_date}');
-    // `;
     let updateAgent = `UPDATE sql10318391.agents 
                         SET CREATE_DATE = '${agent.create_date}', 
                         REFERENCE_ID = '${agent.reference_id}' 
@@ -31,6 +27,18 @@ module.exports = {
     console.log(updateAgent);
     return new Promise((resolve, reject) => {
       db.query(updateAgent, (error, result) => {
+        if (error) {
+          reject(error);
+        }
+        resolve(result);
+      });
+    });
+  },
+  clearData: () => {
+    let clearDataMysql = `update agents set REFERENCE_ID = '',create_date=null ;`;
+    console.log(updateAgent);
+    return new Promise((resolve, reject) => {
+      db.query(clearDataMysql, (error, result) => {
         if (error) {
           reject(error);
         }

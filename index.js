@@ -22,7 +22,7 @@ require("./routes/mongo/AgentRoutes")(app, URL_BASE);
 require("./routes/mysql/agentRoutes")(app, URL_BASE);
 require("./routes/default")(app);
 
-//executeJobs.getAllAgentsFromMySql();
+executeJobs.getAllAgentsFromMySql();
 
 // app.use(notFoundHandler);
 // //Manejadores de Errores

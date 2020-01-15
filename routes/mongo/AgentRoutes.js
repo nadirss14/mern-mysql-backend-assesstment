@@ -51,4 +51,13 @@ module.exports = (app, BASE_URL) => {
       console.log(`Error in ${path}${req.url} : ${error.message}`);
     }
   });
+
+  router.delete("/cleardata", async (req, resp, next) => {
+    try {
+      const data = await Service.clearData();
+      resp.status(200).json(data);
+    } catch (error) {
+      console.log(`Error in ${path}${req.url} : ${error.message}`);
+    }
+  });
 };

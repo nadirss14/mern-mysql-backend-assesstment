@@ -49,7 +49,7 @@ class Jobs {
           agentPhone: element.PHONE_NO,
           workingArea: element.WORKING_AREA,
           commisions: element.COMMISSION,
-          country: ""
+          country: element.COUNTRY
         };
         this.pushAgent(agent);
         console.log("insertIntoDataWarehouse");

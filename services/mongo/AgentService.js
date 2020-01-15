@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { config } = require("../../config/environment");
 const Agent = require("../../model/agent.model");
 const MONGO_URI = require("../../config/mongo/mongoose");
+const ServiceMysql = require("../../services/mysql/AgentServices");
 
 class AgentService {
   constructor() {
@@ -66,6 +67,23 @@ class AgentService {
     return Agent.findByIdAndDelete(id)
       .then(item => {
         return item;
+      })
+      .catch(err => {
+        console.log(err.message);
+        return err;
+      });
+  }
+
+  clearData() {
+    return Agent.deleteMany({})
+      .then(item => {
+        return ServiceMysql.clearData()
+          .then(item => {
+            return "Clear Data";
+          })
+          .catch(error => {
+            return error.message();
+          });
       })
       .catch(err => {
         console.log(err.message);
