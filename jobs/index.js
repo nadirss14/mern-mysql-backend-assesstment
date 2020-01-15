@@ -7,18 +7,19 @@
 // │    │    └─────────────── hour (0 - 23)
 // │    └──────────────────── minute (0 - 59)
 // └───────────────────────── second (0 - 59, OPTIONAL)
-
+require("dotenv").config();
 const scheduled = require("node-schedule");
 const fetch = require("node-fetch");
 const { config } = require("../config/environment");
-
+const PORT = process.env.PORT;
 class Jobs {
   constructor() {
     console.log("init...");
   }
 
   getAllAgentsFromMySql() {
-    const URL = `http://localhost:${config.PORT}/${config.API_BASE}/${config.API_VERSION}/data`;
+    const URL = `http://localhost:${PORT}/${config.API_BASE}/${config.API_VERSION}/data`;
+    console.log(`Error ${URL}`);
     const jobs = scheduled.scheduleJob("/1 * * * * *", async () => {
       const options = {};
       options.method = "GET";
@@ -60,7 +61,8 @@ class Jobs {
   }
 
   async pushAgent(agent) {
-    const URL = `http://localhost:${config.PORT}/${config.API_BASE}/${config.API_VERSION}/agent`;
+    const URL = `http://localhost:${PORT}/${config.API_BASE}/${config.API_VERSION}/agent`;
+    console.log(`Error ${URL}`);
     const options = {};
     options.method = "POST";
     options.body = JSON.stringify(agent);
@@ -77,7 +79,8 @@ class Jobs {
   }
 
   async updateAgentMySql(data) {
-    const URL = `http://localhost:${config.PORT}/${config.API_BASE}/${config.API_VERSION}/data`;
+    const URL = `http://localhost:${PORT}/${config.API_BASE}/${config.API_VERSION}/data`;
+    console.log(`Error ${URL}`);
     try {
       const JsonData = JSON.stringify(data);
       console.log(JsonData);
