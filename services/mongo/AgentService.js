@@ -77,8 +77,10 @@ class AgentService {
   clearData() {
     return Agent.deleteMany({})
       .then(item => {
+        console.log("Clear Data Mongo");
         return ServiceMysql.clearData()
           .then(item => {
+            console.log("Clear Data Mysql");
             return "Clear Data";
           })
           .catch(error => {

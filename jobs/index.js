@@ -60,19 +60,21 @@ class Jobs {
 
   async pushAgent(agent) {
     const URL = `${config.URL}${config.API_BASE}/${config.API_VERSION}/agent`;
-    console.log(`Error ${URL}`);
-    const options = {};
-    options.method = "POST";
-    options.body = JSON.stringify(agent);
-    options.headers = {
-      "Content-Type": "application/json"
-    };
+    try {
+      const options = {};
+      options.method = "POST";
+      options.body = JSON.stringify(agent);
+      options.headers = {
+        "Content-Type": "application/json"
+      };
 
-    const result = await fetch(URL, options);
-    const data = await result.json();
-    console.log("pushAgent");
-    if (data) {
-      this.updateAgentMySql(data);
+      const result = await fetch(URL, options);
+      const data = await result.json();
+      if (data) {
+        this.updateAgentMySql(data);
+      }
+    } catch (error) {
+      console.log(`Error pushAgent: ${error}`);
     }
   }
 

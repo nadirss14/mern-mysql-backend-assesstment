@@ -52,7 +52,7 @@ module.exports = (app, BASE_URL) => {
     }
   });
 
-  router.delete("/cleardata", async (req, resp, next) => {
+  router.post("/cleardata", async (req, resp, next) => {
     try {
       const data = await Service.clearData();
       resp.status(200).json(data);
